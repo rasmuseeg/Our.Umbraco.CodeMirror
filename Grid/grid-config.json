@@ -1,0 +1,9 @@
+﻿{
+  {
+    "name": "Code editor",
+    "alias": "code",
+    "view": "~/App_Plugins/Bootstrap/grid/editors/code.html",
+    "render": "~/App_Plugins/Bootstrap/grid/editors/code.cshtml",
+    "icon": "icon-brackets"
+  }
+}
