@@ -20,9 +20,7 @@
 	// Show the output window only if unrecognized errors occur.
 	"showOutput": "silent",
 
-    "isShellCommand": true,
-
-	// args is the HelloWorld program to compile.
+	// Tell the tsc compiler to use the tsconfig.json from the open folder.
 	"args": [],
 
 	// use the standard tsc problem matcher to find compile problems
