@@ -1,9 +1,8 @@
-﻿{
-  {
+﻿// Add the following to your ~/config/grid.editors.config
+{
     "name": "Code editor",
     "alias": "code",
-    "view": "~/App_Plugins/Bootstrap/grid/editors/code.html",
-    "render": "~/App_Plugins/Bootstrap/grid/editors/code.cshtml",
+    "view": "~/App_Plugins/CodeMirror/Grid/Views/code.html",
+    "render": "~/App_Plugins/CodeMirror/Grid/Render/code.cshtml",
     "icon": "icon-brackets"
-  }
 }
