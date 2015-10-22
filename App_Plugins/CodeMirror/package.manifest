@@ -1,0 +1,61 @@
+﻿{
+  propertyEditors: 
+  [
+    {
+	    name: "CodeMirror",
+	    alias: "REM.CodeMirror",
+	    editor: {
+		    view: "~/App_Plugins/CodeMirror/Editors/Views/Code.html",
+		    valueType: "JSON"
+	    },
+		prevalues: {
+		    fields: [
+			    {
+				    label: "Show line numbers",
+				    description: "Whether to show line numbers to the left of the editor.",
+				    key: "lineNumbers",
+				    view: "boolean",
+					defaultValue: "1"
+			    },
+				{
+				    label: "Wrap words",
+				    description: "Whether CodeMirror should scroll or wrap for long lines. Defaults to false (scroll).",
+				    key: "lineWrapping",
+				    view: "boolean",
+					defaultValue: "0"
+			    },
+				{
+				    label: "Smart indent",
+				    description: "Whether to use the context-sensitive indentation that the mode provides (or just indent the same as the line before). Defaults to true.",
+				    key: "smartIndent",
+				    view: "boolean",
+					defaultValue: "1"
+			    },
+				{
+					label: "indentWithTabs",
+					description: "",
+					key: "indentWithTabs",
+					view: "boolean",
+					defaultValue: "0"
+				},
+				{
+				    label: "Tab size",
+				    description: "The width of a tab character. Defaults to 4.",
+				    key: "tabSize",
+				    view: "number",
+					defaultValue: "4"
+			    }
+		    ]
+	    }
+    }
+  ],
+  javascript: [
+		"~/App_plugins/CodeMirror/Assets/CodeMirror/lib/codemirror.js",
+        "~/App_Plugins/CodeMirror/Assets/CodeMirror/lib/UICodeMirrorDirective.js",
+        "~/App_Plugins/CodeMirror/Editors/Js/code-controller.js",
+        "~/App_Plugins/CodeMirror/Grid/Js/grid-code-controller.js"
+  ],
+  css:[
+		"~/App_Plugins/CodeMirror/Assets/CodeMirror/lib/codemirror.css"
+  ]
+}
