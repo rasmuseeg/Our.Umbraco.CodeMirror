@@ -1,4 +1,7 @@
-﻿module Bootstrap {
+﻿// <reference path="../../typed/angular.d.ts" />
+// <reference path="../../typed/codemirror.d.ts" />
+
+module Bootstrap {
     "use strict";
 
     interface ICodeMirrorModelValue {
