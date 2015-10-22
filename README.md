@@ -1,12 +1,33 @@
 # CodeMirror Editor for Umbraco
+OBS: THIS IS A WORK IN PROGRESS
+
 Adds CodeMirror Editor to Umbraco
 
-# Installation
-1. Install zip from Umbraco Repository or manualy
-2. Create a new DataType with *CodeMirror* editor
+# Installation:
 
-## DataType
-Base configuration
+## DocumentType:
+
+1. Install zip or from Umbraco Repository browser
+2. Create new DataType with CodeMirror, setup config.
+3. Assign the new CodeMirror DataType to a document
+
+## GridLayout:
+
+1. Open *~/config/grid.editors.config.json*
+2. Add the following snippet, to the end of the file before the closing "}":
+<pre><code>
+{
+    "name": "Code editor",
+    "alias": "code",
+    "view": "~/App_Plugins/CodeMirror/Grid/Views/code.html",
+    "render": "~/App_Plugins/CodeMirror/Grid/Render/code.cshtml",
+    "icon": "icon-brackets"
+}
+</code></pre>
+3. In Umbraco Backoffice open your grid layout DataType and assign "Code editor" to your columns
+    * By default if "allow all" is enabled it will be available in your grid layout.
+
+## DataType Configuration
 <pre><code>
 {
     label: "Show line numbers",
@@ -47,4 +68,9 @@ Base configuration
 # What is in the box?
 * DataType
 * Grid Editor + Render view
-* 
+
+
+# Plans
+* Add configuration option for default mode - select list
+* Add configuration option for availble modes - multiple select list 
+* Add support for CodeMirror mode selection - select list in controller view 
