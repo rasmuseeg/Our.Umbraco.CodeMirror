@@ -1,0 +1,129 @@
+.file {
+  position: relative;
+}
+.file-editor {
+  background-color: #f7f7f7;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  position: relative;
+}
+.file-editor.auto-height .CodeMirror {
+  height: auto;
+}
+
+.file-editor .file-header {
+  padding: 5px 10px;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #d8d8d8;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  overflow: auto;
+}
+
+.file-header .file-remove{
+  background: transparent;
+  border: 1px solid #d8d8d8;
+  color: #d8d8d8;
+  margin-left: -5px;
+  height: 30px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.file-header .file-remove:hover{
+  background-color: #d90416;
+  color: #fff;
+  border-color: #a4010f;
+}
+
+.file-header .file-name{
+  background: #f7f7f7;
+  border: 1px solid #d8d8d8;
+}
+
+.file-header .file-name:hover{
+  background: #fff;
+  border: 1px solid #d8d8d8;
+}
+
+.file-editor .file-header:before {
+  display: table;
+  content: "";
+}
+
+.file-editor .file-header .file-actions {
+  float: right;
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.file-header .file-actions li {
+  display: inline-block;
+}
+
+.file-header .file-actions select {
+  width: auto;
+}
+
+
+.file-editor .file-text .CodeMirror,
+.file-editor .file-text{
+  width: 100%;
+}
+
+.file-text.auto-height .CodeMirror {
+  height: auto;
+}
+
+.file-editor .file-footer {
+  color: #808080;
+  border-top: 1px solid #d8d8d8;
+  font-family: monospace;
+  overflow: hidden;
+  position: relative;
+}
+
+.file-footer .toggle-height{
+  border: 0;
+  background-color: transparent;
+  width: 100%;
+  height: 20px;
+  position: absolute;
+}
+
+.file-footer .toggle-height:hover{
+  background-color: #ddd;
+  color: #333;
+}
+
+.file-footer .toggle-height:before{
+  content: "";
+  border: 3px solid transparent;
+  border-top-color: #333;
+  position: absolute;
+  left: 50%;
+}
+
+.file-editor.auto-height .file-footer .toggle-height:before{
+  border-top-color: transparent;
+  border-bottom-color: #333;
+}
+
+.file-editor .file-footer ul {
+  float: right;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.file-editor .file-footer ul > li > span,
+.file-editor .file-footer ul > li > a {
+  padding: 2px 5px;
+  cursor: pointer;
+}
+
+.file-editor .file-footer ul > li:hover {
+  background-color: #d8d8d8;
+}

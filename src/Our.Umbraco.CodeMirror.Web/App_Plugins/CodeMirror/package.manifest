@@ -1,0 +1,75 @@
+﻿{
+  "propertyEditors": [
+    {
+      "name": "CodeMirror Multiple Files Editor",
+      "alias": "CodeMirror.MultipleFiles",
+      "editor": {
+        "view": "~/App_Plugins/CodeMirror/Views/multiple-files.html",
+        "valueType": "JSON"
+      },
+      "prevalues": {
+        "fields": [
+          {
+            "label": "Max editors",
+            "description": "Wether to allow more then one editor. 0 = unlimted",
+            "key": "limit",
+            "view": "number",
+            "defaultValue": "1"
+          },
+          {
+            "label": "Show line numbers",
+            "description": "Whether to show line numbers to the left of the editor.",
+            "key": "lineNumbers",
+            "view": "boolean",
+            "defaultValue": "1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CodeMirror File Editor",
+      "alias": "CodeMirror.File",
+      "editor": {
+        "view": "~/App_Plugins/CodeMirror/Views/file-editor.html",
+        "valueType": "JSON"
+      },
+      "prevalues": {
+        "fields": [
+          {
+            "label": "Show line numbers",
+            "description": "Whether to show line numbers to the left of the editor.",
+            "key": "lineNumbers",
+            "view": "boolean",
+            "defaultValue": "1"
+          },
+          {
+            "label": "Word wrap mode",
+            "description": "Whether wrap words",
+            "key": "wordWrap",
+            "view": "",
+            "defaultValue": "1"
+          },
+          {
+            "label": "Indent mode",
+            "description": "Whether to indent with tabs or spaces.",
+            "key": "indentMode",
+            "view": "",
+            "defaultValue": "1"
+          }
+        ]
+      }
+    }
+  ],
+  "javascript": [
+    "~/umbraco_client/CodeMirror/Js/Lib/codemirror.js",
+    "~/umbraco_client/CodeMirror/Js/Mode/meta.js",
+    "~/App_Plugins/CodeMirror/js/codemirror.directive.js",
+    "~/App_Plugins/CodeMirror/js/file-editor.controller.js",
+    "~/App_Plugins/CodeMirror/js/mutiple-files-editor.controller.js",
+    "~/App_Plugins/CodeMirror/js/grid-file-editor.controller.js"
+  ],
+  "css": [
+    "~/umbraco_client/CodeMirror/Js/Lib/codemirror.css",
+    "~/App_Plugins/CodeMirror/Css/editor.css"
+  ]
+}
