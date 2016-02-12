@@ -1,10 +1,12 @@
-﻿<div ng-controller="CodeMirror.EditorController">
-    <div class="file" ng-if="ready">
-        <div class="file-editor" ng-repeat="file in model.value" ng-class="{'auto-height': autoHeight($index)}">
-            <header class="file-header" ng-click="collapse($index)">
+﻿<div ng-controller="CodeMirror.MultipleFilesController">
+    <div class="file">
+        <div class="file-editor" ng-repeat="file in model.value" ng-class="{'auto-height': file.config.viewportMargin == Infinity}">
+            <header class="file-header" ng-if="!model.config.defaults.hideFilname && !model.config.defaults.hideActions">
+                <span ng-if="!model.config.defautls.hideFilename">
                 <input type="text" class="file-name" ng-model="file.name" ng-change="findMode($index)" placeholder="Filename including extension" />
-                <button type="button" class="btn btn-danger file-remove" ng-click="removeFile($index)" title="Remove file"><i class="icon icon-trash"></i></button>
-                <ul class="file-actions">
+                <button type="button" ng-if="model.value.length > model.config.min" class="btn btn-danger file-remove" ng-click="removeFile($index)" title="Remove file"><i class="icon icon-trash"></i></button>
+                </span>
+                <ul class="file-actions" ng-if="!model.config.defautls.hideActions">
                     <li>
                         <select ng-model="file.config.indentWithTabs"
                                 ng-options="o.v as o.n group by 'Indent mode' for o in [{n: 'Spaces', v:false}, {n: 'Tabs', v:true}]">
@@ -26,7 +28,7 @@
                 <textarea ui-codemirror ui-codemirror-config="file.config" ng-model="file.text"></textarea>
             </div>
             <footer class="file-footer">
-                <button class="toggle-height" type="button" title="Toggle height" ng-click="toggleHeight($index)"></button>
+                <button class="toggle-height" type="button" title="Toggle height" ng-click="toggleAutoHeight($index)"></button>
                 <ul>
                     <li>
                         <span ng-bind="file.config.mode.name"></span>
@@ -36,5 +38,5 @@
         </div>
     </div>
 
-    <a class="btn btn-default" ng-click="addFile()" title="Add file">Add file</a>
+    <a ng-hide="limitReached()" class="btn btn-default" ng-click="addFile()" title="Add file">Add file</a>
 </div>

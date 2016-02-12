@@ -1,15 +1,11 @@
-﻿interface IModeInfo {
-    name: string;
-    mode: string;
-    mime: string;
-    mimes: Array<string>;
-    ext: Array<string>;
-}
-
-module UICodeMirror {
+﻿module CodeMirror.UI {
     "use strict";
 
     interface IUICodeMirrorDirective extends ng.IDirective {
+        link: (scope: IUICodeMirrorDirectiveScope, element: ng.IAugmentedJQuery, attrs: IUICodeMirrorDirectiveAttributes) => void;
+        newEditor: (element: ng.IAugmentedJQuery, options: CodeMirror.EditorConfiguration) => CodeMirror.Editor;
+        watchOptionsForChange: (ditor: CodeMirror.Editor, scope: IUICodeMirrorDirectiveScope) => void;
+        watchEditorForChange: (editor: CodeMirror.Editor, scope: IUICodeMirrorDirectiveScope) => void;
     }
 
     interface IUICodeMirrorDirectiveScope extends ng.IScope {
@@ -23,87 +19,89 @@ module UICodeMirror {
         uiCodemirrorOptions: CodeMirror.EditorConfiguration;
     }
 
-    UICodeMirrorDirective.$inject = ["$window"];
-    function UICodeMirrorDirective($window: ng.IWindowService): IUICodeMirrorDirective {
-        return {
-            restrict: 'EA',
-            require: '?ngModel',
-            scope: {
-                model: '=ngModel',
-                config: '=uiCodemirrorConfig'
-            },
-            link: link
-        }
+    export class CodeMirrorDirective implements ng.IDirective {
+        static $inject = [];
 
-        function link(scope: IUICodeMirrorDirectiveScope, element: ng.IAugmentedJQuery, attrs: IUICodeMirrorDirectiveAttributes) {
+        public restrict = "EA";
+        public require = "?ngModel";
+        public scope = {
+            model: "=ngModel",
+            config: "=uiCodemirrorConfig"
+        };
+
+        public link = (scope: IUICodeMirrorDirectiveScope, element: ng.IAugmentedJQuery, attrs: IUICodeMirrorDirectiveAttributes) => {
             // Require CodeMirror
             if (angular.isUndefined((<any>window).CodeMirror)) {
                 throw new Error('ui-codemirror needs CodeMirror to work');
             }
 
-            var codeMirrorConfig = angular.extend(
+            var config = angular.extend(
                 { value: scope.model },
                 CodeMirror.defaults,
                 scope.config
             );
 
-            var codemirror = newCodemirrorEditor(element, codeMirrorConfig);
+            var editor = this.newEditor(element, config);
             scope.element = element;
-            // Apply watchers
-            watchOptionsForChange(codemirror, scope);
-            watchCodeMirrorForChange(codemirror, scope);
 
-            // Allow access to the CodeMirror instance through a broadcasted event
-            // eg: $broadcast('CodeMirror', function(cm){...});
-            //scope.$on('CodeMirror', function (event, callback) {
-            //    if (angular.isFunction(callback)) {
-            //        callback(codemirror);
-            //    } else {
-            //        throw new Error('the CodeMirror event requires a callback function');
-            //    }
-            //});
+            // Apply watchers
+            this.watchOptionsForChange(editor, scope);
+            this.watchEditorForChange(editor, scope);
+
+            // Load the current mode
+            if(config.mode)
+                CodeMirror.autoLoadMode(editor, config.mode.mode);
 
             // onLoad callback
-            if (angular.isFunction(codeMirrorConfig.onLoad)) {
-                codeMirrorConfig.onLoad(codemirror);
+            if (angular.isFunction(scope.config.onLoad)) {
+                scope.config.onLoad(editor);
             }
         }
 
-        function newCodemirrorEditor(element: ng.IAugmentedJQuery, codeMirrorOptions: CodeMirror.EditorConfiguration) {
+        public newEditor = (element: ng.IAugmentedJQuery, option: CodeMirror.EditorConfiguration) => {
             var codemirror: CodeMirror.Editor;
 
             if (element[0].tagName === 'TEXTAREA') {
                 // Might bug but still ...
-                codemirror = CodeMirror.fromTextArea(<HTMLTextAreaElement>element[0], codeMirrorOptions);
+                codemirror = CodeMirror.fromTextArea(<HTMLTextAreaElement>element[0], option);
             } else {
                 element.html('');
                 codemirror = CodeMirror((cm_el) => {
                     element.append(cm_el);
-                }, codeMirrorOptions);
+                }, option);
             }
 
             return codemirror;
         }
 
-        function watchOptionsForChange(codemirror: CodeMirror.Editor, scope: IUICodeMirrorDirectiveScope) {
+        public watchOptionsForChange = (editor: CodeMirror.Editor, scope: IUICodeMirrorDirectiveScope) => {
             var codemirrorDefaultsKeys = Object.keys(CodeMirror.defaults);
-            scope.$watch('options', (newValues, oldValues, scope) => {
-                if (!angular.isObject(newValues)) { return; }
+
+            scope.$watch<CodeMirror.EditorConfiguration>('config', (newConfig, oldConfig) => {
+                if (!angular.isObject(newConfig)) { return; }
 
                 codemirrorDefaultsKeys.forEach(function (key) {
-                    if (newValues.hasOwnProperty(key)) {
-                        if (oldValues && newValues[key] === oldValues[key]) {
+                    if (newConfig.hasOwnProperty(key)) {
+                        if (oldConfig && newConfig[key] === oldConfig[key]) {
                             return;
                         }
-                        codemirror.setOption(key, newValues[key]);
+                        switch (key){
+                            case "mode":
+                                editor.setOption(key, newConfig[key]);
+                                if (CodeMirror.autoLoadMode)
+                                    CodeMirror.autoLoadMode(editor, newConfig[key]);
+                                break;
+                            default:
+                                editor.setOption(key, newConfig[key]);
+                                break;
+                        }
                     }
                 });
             }, true);
         }
 
-        function watchCodeMirrorForChange(codemirror: CodeMirror.Editor, scope: IUICodeMirrorDirectiveScope) {
-
-            var doc = codemirror.getDoc();
+        public watchEditorForChange = (editor: CodeMirror.Editor, scope: IUICodeMirrorDirectiveScope) => {
+            var doc = editor.getDoc();
             scope.$watch('model', (newValue:string, oldValue:string) => {
                 //Code mirror expects a string so make sure it gets one
                 //Although the formatter have already done this, it can be possible that another formatter returns undefined (for example the required directive)
@@ -114,7 +112,7 @@ module UICodeMirror {
                 }
             });
 
-            codemirror.on('change', (instance: CodeMirror.Editor, change: CodeMirror.EditorChangeLinkedList) => {
+            editor.on('change', (instance: CodeMirror.Editor, change: CodeMirror.EditorChangeLinkedList) => {
                 var doc = instance.getDoc();
                 var newValue = doc.getValue();
                 if (newValue !== scope.model) {
@@ -123,8 +121,11 @@ module UICodeMirror {
                 }
             });
         }
+
+        constructor() {
+        }
     }
 
     var app = angular.module("ui.codemirror", []);
-    app.directive("uiCodemirror", UICodeMirrorDirective);
+    app.directive("uiCodemirror", () => new CodeMirrorDirective());
 }

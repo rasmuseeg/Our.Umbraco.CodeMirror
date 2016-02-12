@@ -151,6 +151,7 @@
     {name: "xu", mime: "text/x-xu", mode: "mscgen", ext: ["xu"]},
     {name: "msgenny", mime: "text/x-msgenny", mode: "mscgen", ext: ["msgenny"]}
   ];
+
   // Ensure all modes have a mime property for backwards compatibility
   for (var i = 0; i < CodeMirror.modeInfo.length; i++) {
     var info = CodeMirror.modeInfo[i];

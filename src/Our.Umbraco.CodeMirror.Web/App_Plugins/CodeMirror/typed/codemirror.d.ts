@@ -16,6 +16,8 @@ declare module CodeMirror {
     var version: string;
     var defaults: CodeMirror.EditorConfiguration;
 
+    function autoLoadMode(editor: CodeMirror.Editor, mode: string);
+
     /** If you want to define extra methods in terms of the CodeMirror API, it is possible to use defineExtension.
     This will cause the given value(usually a method) to be added to all CodeMirror instances created from then on. */
     function defineExtension(name: string, value: any): void;
@@ -798,8 +800,10 @@ declare module CodeMirror {
         /** Optional lint configuration to be used in conjunction with CodeMirror's linter addon. */
         lint?: boolean | LintOptions;
 
-	/** Optional value to be used in conduction with CodeMirror’s placeholder add-on. */
-	placeholder?: string;
+        /** Optional value to be used in conduction with CodeMirror’s placeholder add-on. */
+        placeholder?: string;
+
+        onLoad?: (editor:Editor) => void;
     }
 
     interface TextMarkerOptions {

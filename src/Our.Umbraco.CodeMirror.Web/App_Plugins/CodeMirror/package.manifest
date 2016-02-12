@@ -1,75 +1,71 @@
 ﻿{
   "propertyEditors": [
     {
-      "name": "CodeMirror Multiple Files Editor",
+      "name": "Code Editor - Multiple",
       "alias": "CodeMirror.MultipleFiles",
       "editor": {
-        "view": "~/App_Plugins/CodeMirror/Views/multiple-files.html",
+        "view": "~/App_Plugins/CodeMirror/Views/codemirror-multiple.html",
         "valueType": "JSON"
       },
       "prevalues": {
         "fields": [
           {
-            "label": "Max editors",
-            "description": "Wether to allow more then one editor. 0 = unlimted",
-            "key": "limit",
+            "label": "Min",
+            "description": "Specify the minimum number of editors. empty or zero, starts with add button. Greater 1 starts with empty file.",
+            "key": "min",
             "view": "number",
-            "defaultValue": "1"
+            "defaultValue": "0"
           },
           {
-            "label": "Show line numbers",
-            "description": "Whether to show line numbers to the left of the editor.",
-            "key": "lineNumbers",
-            "view": "boolean",
-            "defaultValue": "1"
+            "label": "Max",
+            "description": "Specify the max number of editors. 0 = unlimited",
+            "key": "max",
+            "view": "number",
+            "defaultValue": "0"
+          },
+          {
+            "label": "Defaults",
+            "description": "",
+            "key": "defaults",
+            "hideLabel":  true,
+            "view": "~/App_Plugins/CodeMirror/views/prevalues/codemirror-config.html"
           }
         ]
       }
     },
     {
-      "name": "CodeMirror File Editor",
+      "name": "Code Editor",
       "alias": "CodeMirror.File",
       "editor": {
-        "view": "~/App_Plugins/CodeMirror/Views/file-editor.html",
+        "view": "~/App_Plugins/CodeMirror/Views/codemirror-file.html",
         "valueType": "JSON"
       },
       "prevalues": {
         "fields": [
           {
-            "label": "Show line numbers",
-            "description": "Whether to show line numbers to the left of the editor.",
-            "key": "lineNumbers",
-            "view": "boolean",
-            "defaultValue": "1"
-          },
-          {
-            "label": "Word wrap mode",
-            "description": "Whether wrap words",
-            "key": "wordWrap",
-            "view": "",
-            "defaultValue": "1"
-          },
-          {
-            "label": "Indent mode",
-            "description": "Whether to indent with tabs or spaces.",
-            "key": "indentMode",
-            "view": "",
-            "defaultValue": "1"
+            "label": "Defaults",
+            "description": "",
+            "key": "defaults",
+            "hideLabel": true,
+            "view": "~/App_Plugins/CodeMirror/views/prevalues/codemirror-config.html"
           }
         ]
       }
     }
   ],
   "javascript": [
-    "~/umbraco_client/CodeMirror/Js/Lib/codemirror.js",
-    "~/umbraco_client/CodeMirror/Js/Mode/meta.js",
+    "~/App_Plugins/CodeMirror/components/codemirror/lib/codemirror.js",
+    "~/App_Plugins/CodeMirror/components/codemirror/addon/mode/loadmode.js",
+    "~/App_Plugins/CodeMirror/components/codemirror/mode/meta.js",
+    "~/App_Plugins/CodeMirror/views/prevalues/codemirror-config.controller.js",
     "~/App_Plugins/CodeMirror/js/codemirror.directive.js",
-    "~/App_Plugins/CodeMirror/js/file-editor.controller.js",
-    "~/App_Plugins/CodeMirror/js/mutiple-files-editor.controller.js",
-    "~/App_Plugins/CodeMirror/js/grid-file-editor.controller.js"
+    "~/App_Plugins/CodeMirror/js/codemirror-file-editor.js",
+    "~/App_Plugins/CodeMirror/js/codemirror-file.controller.js",
+    "~/App_Plugins/CodeMirror/js/codemirror-multiple.controller.js",
+    "~/App_Plugins/CodeMirror/js/codemirror-grid.controller.js"
   ],
   "css": [
-    "~/umbraco_client/CodeMirror/Js/Lib/codemirror.css",
-    "~/App_Plugins/CodeMirror/Css/editor.css"
+    "~/App_Plugins/CodeMirror/components/CodeMirror/lib/codemirror.css",
+    "~/App_Plugins/CodeMirror/css/codemirror-file-editor.css"
   ]
 }
