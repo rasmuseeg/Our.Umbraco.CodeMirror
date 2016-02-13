@@ -9,8 +9,8 @@ var CodeMirror;
             var _this = this;
             this.$scope = $scope;
             this.$timeout = $timeout;
-            $scope.model.config.min = parseInt($scope.model.config.min);
-            $scope.model.config.max = parseInt($scope.model.config.max);
+            $scope.model.config.min = parseInt($scope.model.config.min) || 0;
+            $scope.model.config.max = parseInt($scope.model.config.max) || 0;
             // Parse defaults 
             if (typeof $scope.model.config.defaults === 'string')
                 $scope.model.config.defaults = JSON.parse($scope.model.config.defaults);
@@ -45,17 +45,21 @@ var CodeMirror;
                     return false;
             };
             $scope.addFile = function () {
+                if (angular.isArray($scope.model.value) == false)
+                    $scope.model.value = [];
                 if ($scope.limitReached() == false) {
                     var file = new CodeMirror.FileEditor($scope.model.config.defaults);
                     $scope.model.value.push(file);
                 }
             };
+            // Can we remove a file?
             $scope.canRemove = function () {
                 var min = $scope.model.config.min;
-                if (min > 0 && min < $scope.model.value.length)
+                if (min <= 0 || (min > 0 && min < $scope.model.value.length))
                     return true;
                 return false;
             };
+            // Removes a file from the collecion
             $scope.removeFile = function ($index) {
                 var file = $scope.model.value[$index];
                 if (confirm('Confirm that you wish to delete: ' + file.name)) {
@@ -63,17 +67,16 @@ var CodeMirror;
                 }
             };
             var timeout = null;
-            $scope.findMode = function ($index) {
+            $scope.filenameChange = function ($index) {
                 _this.$timeout.cancel(timeout);
                 timeout = _this.$timeout(function () {
                     var file = $scope.model.value[$index];
                     var modeByFileName = CodeMirror.findModeByFileName(file.name);
                     if (modeByFileName != null && modeByFileName.mode != null) {
-                        //this.fetchModeScripts(modeByFileName).done(() => {
                         file.config.mode = modeByFileName;
                     }
                     else {
-                        file.config.mode = null;
+                        file.config.mode = $scope.model.config.defaults.mode;
                     }
                 }, 700);
             };

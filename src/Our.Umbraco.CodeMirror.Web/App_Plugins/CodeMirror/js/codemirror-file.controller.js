@@ -6,6 +6,7 @@ var CodeMirror;
     "use strict";
     var FileController = (function () {
         function FileController($scope, $timeout) {
+            var _this = this;
             this.$scope = $scope;
             this.$timeout = $timeout;
             if (typeof this.defaults === 'string')
@@ -14,11 +15,6 @@ var CodeMirror;
             if (angular.isObject($scope.model.value) == false) {
                 $scope.model.value = new CodeMirror.FileEditor($scope.model.config.defaults);
             }
-        }
-        FileController.prototype.activate = function () {
-            var _this = this;
-            var $scope = this.$scope;
-            var $timeout = this.$timeout;
             var timeout = null;
             $scope.filenameChange = function () {
                 // wait for user to finish typing
@@ -30,11 +26,11 @@ var CodeMirror;
                         file.config.mode = modeInfo;
                     }
                     else {
-                        file.config.mode = null;
+                        file.config.mode = $scope.model.config.defaults.mode;
                     }
                 }, 700);
             };
-        };
+        }
         FileController.$inject = ["$scope", "$timeout"];
         return FileController;
     })();

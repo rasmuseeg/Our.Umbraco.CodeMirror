@@ -32,11 +32,6 @@ module CodeMirror {
             if (angular.isObject($scope.model.value) == false) {
                 $scope.model.value = new FileEditor($scope.model.config.defaults);
             }
-        }
-
-        activate() {
-            var $scope = this.$scope;
-            var $timeout = this.$timeout;
 
             var timeout = null;
             $scope.filenameChange = () => {
@@ -49,7 +44,7 @@ module CodeMirror {
                     if (modeInfo != null && modeInfo.mode != null) {
                         file.config.mode = modeInfo;
                     } else {
-                        file.config.mode = null;
+                        file.config.mode = $scope.model.config.defaults.mode;
                     }
                 }, 700);
             }

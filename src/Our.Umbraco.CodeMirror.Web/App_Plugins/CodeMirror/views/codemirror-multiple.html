@@ -1,11 +1,9 @@
 ﻿<div ng-controller="CodeMirror.MultipleFilesController">
     <div class="file">
         <div class="file-editor" ng-repeat="file in model.value" ng-class="{'auto-height': file.config.viewportMargin == Infinity}">
-            <header class="file-header" ng-if="!model.config.defaults.hideFilname && !model.config.defaults.hideActions">
-                <span ng-if="!model.config.defautls.hideFilename">
-                <input type="text" class="file-name" ng-model="file.name" ng-change="findMode($index)" placeholder="Filename including extension" />
-                <button type="button" ng-if="model.value.length > model.config.min" class="btn btn-danger file-remove" ng-click="removeFile($index)" title="Remove file"><i class="icon icon-trash"></i></button>
-                </span>
+            <header class="file-header">
+                <input type="text" class="file-name" ng-hide="model.config.defautls.hideFilename" ng-model="file.name" ng-change="filenameChange($index)" placeholder="Filename including extension" />
+                <button type="button" ng-show="canRemove()" class="btn btn-danger file-remove" ng-click="removeFile($index)" title="Remove file"><i class="icon icon-trash"></i></button>
                 <ul class="file-actions" ng-if="!model.config.defautls.hideActions">
                     <li>
                         <select ng-model="file.config.indentWithTabs"

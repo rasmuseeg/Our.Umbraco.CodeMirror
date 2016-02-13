@@ -1,6 +1,6 @@
 ﻿module CodeMirror {
     export var modeURL: string;
-    CodeMirror.modeURL = "/App_plugins/CodeMirror/components/codemirror/mode/%N/%N.js";
+    CodeMirror.modeURL = "/App_Plugins/CodeMirror/components/codemirror/mode/%N/%N.js";
 
     export class FileEditor implements IFile {
         public name: string;
@@ -12,23 +12,6 @@
             this.text = "";
             this.config = config;
         }
-
-        
-
-        //changeMode = () => {
-        //    // wait for user to finish typing
-        //    this.$timeout.cancel(timeout);
-        //    timeout = $timeout(() => {
-        //        var file = this.$scope.model.value;
-        //        var modeInfo = CodeMirror.findModeByFileName(file.name);
-        //
-        //        if (modeInfo != null && modeInfo.mode != null) {
-        //            file.config.mode = modeInfo;
-        //        } else {
-        //            file.config.mode = null;
-        //        }
-        //    }, 700);
-        //}
     }
 
 }
