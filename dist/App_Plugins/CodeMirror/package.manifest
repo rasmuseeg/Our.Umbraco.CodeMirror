@@ -1,0 +1,71 @@
+﻿{
+  "propertyEditors": [
+    {
+      "name": "Code Editor - Multiple",
+      "alias": "CodeMirror.MultipleFiles",
+      "editor": {
+        "view": "~/App_Plugins/CodeMirror/Views/codemirror-multiple.html",
+        "valueType": "JSON"
+      },
+      "prevalues": {
+        "fields": [
+          {
+            "label": "Min",
+            "description": "Specify the minimum number of editors. empty or zero, starts with add button. Greater 1 starts with empty file.",
+            "key": "min",
+            "view": "number",
+            "defaultValue": "0"
+          },
+          {
+            "label": "Max",
+            "description": "Specify the max number of editors. 0 = unlimited",
+            "key": "max",
+            "view": "number",
+            "defaultValue": "0"
+          },
+          {
+            "label": "Defaults",
+            "description": "",
+            "key": "defaults",
+            "hideLabel":  true,
+            "view": "~/App_Plugins/CodeMirror/views/prevalues/codemirror-config.html"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Code Editor",
+      "alias": "CodeMirror.File",
+      "editor": {
+        "view": "~/App_Plugins/CodeMirror/Views/codemirror-file.html",
+        "valueType": "JSON"
+      },
+      "prevalues": {
+        "fields": [
+          {
+            "label": "Defaults",
+            "description": "",
+            "key": "defaults",
+            "hideLabel": true,
+            "view": "~/App_Plugins/CodeMirror/views/prevalues/codemirror-config.html"
+          }
+        ]
+      }
+    }
+  ],
+  "javascript": [
+    "~/App_Plugins/CodeMirror/components/codemirror/lib/codemirror.js",
+    "~/App_Plugins/CodeMirror/components/codemirror/addon/mode/loadmode.js",
+    "~/App_Plugins/CodeMirror/components/codemirror/mode/meta.js",
+    "~/App_Plugins/CodeMirror/views/prevalues/codemirror-config.controller.js",
+    "~/App_Plugins/CodeMirror/js/codemirror.directive.js",
+    "~/App_Plugins/CodeMirror/js/codemirror-file-editor.js",
+    "~/App_Plugins/CodeMirror/js/codemirror-file.controller.js",
+    "~/App_Plugins/CodeMirror/js/codemirror-multiple.controller.js",
+    "~/App_Plugins/CodeMirror/js/codemirror-grid.controller.js"
+  ],
+  "css": [
+    "~/App_Plugins/CodeMirror/components/CodeMirror/lib/codemirror.css",
+    "~/App_Plugins/CodeMirror/css/codemirror-file-editor.css"
+  ]
+}
