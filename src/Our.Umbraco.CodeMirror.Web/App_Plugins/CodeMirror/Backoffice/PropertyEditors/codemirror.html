@@ -1,0 +1,16 @@
+<div ng-controller="OurCodeMirror.PropertyEditors.CodeMirrorController">
+    <div ng-if="ready">
+        <div class="OurCodeMirror">
+            <ul ng-if="tools.length > 0" class="OurCodeMirror-toolbar" ng-class="['toolbar-'+ model.config.defaults.theme.name]">
+                <li ng-repeat="tool in tools" class="tool">
+                    <a href="#" prevent-default ng-if="tool.className !== 'divider'" ng-click="executeAction($index)">
+                        <span ng-class="['icon', tool.className]"></span>
+                    </a>
+
+                    <span ng-if="tool.className === 'divider'" class="divider">&nbsp;</span>
+                </li>
+            </ul>
+            <umb-codemirror ng-model="model.value" options="options"></umb-codemirror>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div ng-controller="OurCodeMirror.PrevalueEditors.Overlays.ToolController">
+    <umb-control-group label="Name">
+        <input type="text" name="name" ng-model="model.tool.name" required />
+        <span class="help-inline" val-msg-for="name" val-toggle-msg="required">Required</span>
+    </umb-control-group>
+
+    <umb-control-group label="Shortcut">
+        <input type="text" ng-model="model.tool.shortcut" ng-pattern="keyMapRegex" pattern="(((Ctrl|Alt|Shift|Cmd)-)+[A-Z])" />
+        <span class="help-inline" val-msg-for="keyMap" val-toggle-msg="pattern">Strokes does not match pattern. Prefixes are: Ctrl-|Alt-|Cmd-|Shift- followed by a another prefix or A-Z</span>
+    </umb-control-group>
+
+    <umb-control-group label="Class name">
+        <button type="button" class="btn btn-default" ng-click="iconPicker()"><i ng-class="model.tool.className"></i> <span ng-if="!model.tool.className">Pick icon</span></button>
+        <input type="text" name="className" required ng-model="model.tool.className" placeholder="or write your own class" />
+    </umb-control-group>
+
+    <umb-control-group label="Function" description="Create your annonymous function here. We use auto injection, so you could inject your own services. For access to the controller use cmCtrl.">
+        <umb-codemirror ng-model="model.tool.action" options="{ lineNumbers:true, matchBrackets:true, mode: 'javascript'}"></umb-codemirror>
+    </umb-control-group>
+
+    <umb-overlay ng-if="iconOverlay.show"
+                 model="iconOverlay"
+                 view="iconOverlay.view"
+                 position="right">
+    </umb-overlay>
+</div>

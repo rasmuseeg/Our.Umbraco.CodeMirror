@@ -1,0 +1,93 @@
+<div ng-controller="OurCodeMirror.PrevalueEditors.PrevalueController" class="ourcodemirror-prevalues">
+
+    <div ng-controller="OurCodeMirror.PrevalueEditors.ModeController">
+        <umb-control-group label="Mode" description="Select the mode to use">
+            <select ng-model="model.value.modeInfo" ng-options="modeInfo as modeInfo.name for modeInfo in modes track by modeInfo.mode">
+                <option value="">Choose your mode</option>
+            </select>
+        </umb-control-group>
+    </div>
+
+    <div ng-controller="OurCodeMirror.PrevalueEditors.AddonsController">
+        <umb-control-group label="Addons" description="Select the addons to load">
+            <div ng-repeat="(folderName, folder) in folders">
+                <!--<label>{{folderName}}</label>-->
+                <div class="radio" ng-repeat="addon in folder">
+                    <input type="checkbox"
+                           name="model.value.addons[]"
+                           id="{{addon.alias}}"
+                           value="{{addon.alias}}"
+                           ng-click="toggle(folderName, addon)"
+                           ng-checked="indexOf(folderName, addon.alias) > -1" />
+                    <label for="{{addon.alias}}">
+                        {{addon.name}}
+                        <small ng-if="addon.decription" class="help-block" ng-bind="addon.description"></small>
+                    </label>
+                </div>
+            </div>
+        </umb-control-group>
+    </div>
+
+    <umb-control-group label="Toolbar">
+        <div ng-controller="OurCodeMirror.PrevalueEditors.ToolbarController">
+            <ul ui-sortable class="toolbar">
+                <li ng-repeat="tool in model.value.tools">
+                    <a href="#" prevent-default ng-click="editTool($index)" class="icon">
+                        <div class="tool-icon">
+                            <i ng-class="tool.className"></i>
+                        </div>
+                        <div class="tool-body">
+                            <span class="tool-name" ng-bind="tool.name"></span>
+                            <small ng-if="tool.shortcut">({{tool.shortcut}})</small>
+                        </div>
+                    </a>
+
+                    <a href="#" class="tool-delete" prevent-default ng-click="deleteTool($index)"><i class="fa fa-trash"></i></a>
+                </li>
+            </ul>
+            <a href="#" prevent-default class="btn btn-default" ng-click="addTool()">
+                <i class="fa fa-plus"></i>
+                <localize key="general_add">Add</localize>
+            </a>
+
+            <umb-overlay ng-if="toolOverlay.show"
+                         model="toolOverlay"
+                         view="toolOverlay.view"
+                         position="right">
+            </umb-overlay>
+        </div>
+    </umb-control-group>
+
+
+
+    <umb-control-group label="Theme" description="Create your theme here">
+        <input type="text" ng-model="model.value.theme.name" class="form-control" placeholder="Give your theme a name" />
+        <umb-codemirror ng-model="model.value.theme.css" options="{ mode:'css', lineNumbers: true }" class="form-control"></umb-codemirror>
+    </umb-control-group>
+
+    <umb-control-group label="Preview">
+        <div ng-controller="OurCodeMirror.PropertyEditors.CodeMirrorController" ng-init="model.config{ defaults: model.value }">
+            <div ng-if="ready">
+                <div class="OurCodeMirror">
+                    <ul ng-if="tools.length > 0" class="OurCodeMirror-toolbar">
+                        <li ng-repeat="tool in tools">
+                            <a href="#" prevent-default ng-class="tool.className" ng-click="executeAction($index)"></a>
+                        </li>
+                    </ul>
+                    <umb-codemirror ng-model="model.value" options="options"></umb-codemirror>
+                </div>
+            </div>
+        </div>
+    </umb-control-group>
+
+    <umb-control-group label="Json" description="Edit or paste configuration here.">
+        <div ng-controller="OurCodeMirror.PrevalueEditors.JsonController">
+            <button class="btn btn-default" type="button" ng-click="edit()">Edit Configuration</button>
+            <umb-overlay ng-if="jsonOverlay.show"
+                         model="jsonOverlay"
+                         view="jsonOverlay.view"
+                         position="right">
+            </umb-overlay>
+        </div>
+    </umb-control-group>
+</div>

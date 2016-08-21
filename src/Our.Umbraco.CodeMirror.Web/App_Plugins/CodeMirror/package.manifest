@@ -1,43 +1,10 @@
 ﻿{
   "propertyEditors": [
     {
-      "name": "Code Editor - Multiple",
-      "alias": "CodeMirror.MultipleFiles",
+      "name": "CodeMirror",
+      "alias": "Our.CodeMirror",
       "editor": {
-        "view": "~/App_Plugins/CodeMirror/Views/codemirror-multiple.html",
-        "valueType": "JSON"
-      },
-      "prevalues": {
-        "fields": [
-          {
-            "label": "Min",
-            "description": "Specify the minimum number of editors. empty or zero, starts with add button. Greater 1 starts with empty file.",
-            "key": "min",
-            "view": "number",
-            "defaultValue": "0"
-          },
-          {
-            "label": "Max",
-            "description": "Specify the max number of editors. 0 = unlimited",
-            "key": "max",
-            "view": "number",
-            "defaultValue": "0"
-          },
-          {
-            "label": "Defaults",
-            "description": "",
-            "key": "defaults",
-            "hideLabel":  true,
-            "view": "~/App_Plugins/CodeMirror/views/prevalues/codemirror-config.html"
-          }
-        ]
-      }
-    },
-    {
-      "name": "Code Editor",
-      "alias": "CodeMirror.File",
-      "editor": {
-        "view": "~/App_Plugins/CodeMirror/Views/codemirror-file.html",
+        "view": "~/App_Plugins/CodeMirror/Backoffice/PropertyEditors/codemirror.html",
         "valueType": "JSON"
       },
       "prevalues": {
@@ -47,25 +14,32 @@
             "description": "",
             "key": "defaults",
             "hideLabel": true,
-            "view": "~/App_Plugins/CodeMirror/views/prevalues/codemirror-config.html"
+            "view": "~/App_Plugins/CodeMirror/Backoffice/PrevalueEditors/prevalue.html"
           }
         ]
       }
     }
   ],
   "javascript": [
-    "~/App_Plugins/CodeMirror/components/codemirror/lib/codemirror.js",
-    "~/App_Plugins/CodeMirror/components/codemirror/addon/mode/loadmode.js",
-    "~/App_Plugins/CodeMirror/components/codemirror/mode/meta.js",
-    "~/App_Plugins/CodeMirror/views/prevalues/codemirror-config.controller.js",
-    "~/App_Plugins/CodeMirror/js/codemirror.directive.js",
-    "~/App_Plugins/CodeMirror/js/codemirror-file-editor.js",
-    "~/App_Plugins/CodeMirror/js/codemirror-file.controller.js",
-    "~/App_Plugins/CodeMirror/js/codemirror-multiple.controller.js",
-    "~/App_Plugins/CodeMirror/js/codemirror-grid.controller.js"
+    "~/App_Plugins/CodeMirror/Assets/jsonfn/jsonfn.js",
+    "~/App_Plugins/CodeMirror/Assets/codemirror/lib/codemirror.js",
+    "~/App_Plugins/CodeMirror/Assets/codemirror/addon/mode/loadmode.js",
+    "~/App_Plugins/CodeMirror/Assets/codemirror/mode/meta.js",
+    "~/App_Plugins/CodeMirror/Directives/codemirror.directive.js",
+    "~/App_Plugins/CodeMirror/Backoffice/PropertyEditors/controllers/codemirror.controller.js",
+    "~/App_Plugins/CodeMirror/Backoffice/PrevalueEditors/Overlays/Controllers/tool.controller.js",
+    "~/App_Plugins/CodeMirror/Backoffice/PrevalueEditors/controllers/prevalue.controller.js",
+    "~/App_Plugins/CodeMirror/Backoffice/PrevalueEditors/controllers/mode.controller.js",
+    "~/App_Plugins/CodeMirror/Backoffice/PrevalueEditors/controllers/addons.controller.js",
+    "~/App_Plugins/CodeMirror/Backoffice/PrevalueEditors/controllers/toolbar.controller.js",
+    "~/App_Plugins/CodeMirror/Backoffice/PrevalueEditors/controllers/keymaps.controller.js",
+    "~/App_Plugins/CodeMirror/Backoffice/PrevalueEditors/controllers/options.controller.js",
+    "~/App_Plugins/CodeMirror/Backoffice/PrevalueEditors/controllers/json.controller.js",
+    "~/App_Plugins/CodeMirror/Backoffice/Dialogs/controllers/tool.controller.js"
   ],
   "css": [
-    "~/App_Plugins/CodeMirror/components/CodeMirror/lib/codemirror.css",
-    "~/App_Plugins/CodeMirror/css/codemirror-file-editor.css"
+    "~/App_Plugins/CodeMirror/Assets/codemirror/lib/codemirror.css",
+    "~/App_Plugins/CodeMirror/css/codemirror-prevalue.css",
+    "~/App_Plugins/CodeMirror/css/codemirror-propertyeditor.css"
   ]
 }

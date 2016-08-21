@@ -1,0 +1,37 @@
+﻿<div ng-controller="Our.CodeEditorController">
+    <div class="file">
+        <div class="file-editor">
+            <header class="file-header" ng-hide="model.config.hideActions && model.config.hideFilename">
+                <input type="text" class="file-name" ng-hide="model.config.hideFilename" ng-model="model.value.name" ng-change="filenameChange()" placeholder="Filename including extension" />
+                <ul class="file-actions" ng-hide="model.config.hideActions">
+                    <li>
+                        <select ng-model="model.value.config.indentWithTabs"
+                                ng-options="o.v as o.n group by 'Indent mode' for o in [{n: 'Spaces', v:false}, {n: 'Tabs', v:true}]"></select>
+                    </li>
+                    <li>
+                        <select ng-model="model.value.config.tabSize"
+                                ng-options="o.v as o.n group by 'Indent size' for o in [{n: '2', v:2}, {n: '4', v:4}, {n:'8', v:8}]"></select>
+                    </li>
+                    <li>
+                        <select ng-model="model.value.config.lineWrapping"
+                                ng-options="o.v as o.n group by 'Line wrap mode' for o in [{n: 'Soft wrap', v:true}, {n: 'No wrap', v:false}]"></select>
+                    </li>
+                </ul>
+            </header>
+            <div class="file-text">
+                <umb-codemirror options="model.value.options"
+                               callback="loaded"
+                               ng-model="model.value.text">
+                </umb-codemirror>
+            </div>
+            <footer class="file-footer">
+                <button class="toggle-height" type="button" title="Toggle height" ng-click="file.toggleAutoHeight()"></button>
+                <ul class="list-tools pull-right">
+                    <li>
+                        <span ng-bind="model.value.config.mode.name"></span>
+                    </li>
+                </ul>
+            </footer>
+        </div>
+    </div>
+</div>

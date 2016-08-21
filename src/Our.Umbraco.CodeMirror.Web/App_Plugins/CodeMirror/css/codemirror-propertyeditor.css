@@ -1,0 +1,136 @@
+
+.cm-s-default {
+  border: 1px solid #ccc;
+  height: auto !important;
+  min-height: 0;
+}
+
+.CodeMirror.cm-s-default,
+.CodeMirror .CodeMirror-scroll {
+  height: auto;
+  min-height: 0;
+}
+
+.OurCodeMirror {
+}
+
+.OurCodeMirror-toolbar {
+  list-style: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  border: 1px solid #D9D9D9;
+}
+
+  .OurCodeMirror-toolbar > li {
+    display: inline-block;
+    margin-left: -1px;
+    font-size: 18px;
+    position: relative;
+    vertical-align: top;
+    line-height: 18px;
+  }
+
+    .OurCodeMirror-toolbar > li:hover {
+      cursor: pointer;
+    }
+
+    .OurCodeMirror-toolbar > li > a {
+      display: inline-block;
+      padding: 8px 12px;
+      text-decoration: none;
+    }
+
+    .OurCodeMirror-toolbar > li > .divider {
+      position: relative;
+      display: inline-block;
+      padding: 9px 0;
+      margin: 0 6px;
+      text-indent: -99999px;
+    }
+
+      .OurCodeMirror-toolbar > li > .divider:after {
+        content: " ";
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        border-left: 1px solid #eee;
+      }
+
+    .OurCodeMirror-toolbar > li > a > .icon {
+      line-height: 20px;
+      display: inline-block;
+    }
+
+    .OurCodeMirror-toolbar > li:hover > .icon {
+      color: #2E8AEA;
+    }
+
+    .OurCodeMirror-toolbar > li:hover > .delete {
+    }
+
+    .OurCodeMirror-toolbar > li > .delete {
+      display: block;
+      padding: 10px 12px;
+      width: 100%;
+      box-sizing: border-box;
+      margin-left: -1px;
+      font-size: 14px;
+      text-decoration: none;
+      color: #333333;
+      position: absolute;
+      z-index: 1;
+      bottom: 100%;
+      right: 0;
+      background-color: #fff;
+      display: none;
+    }
+
+      .OurCodeMirror-toolbar > li > .delete:hover {
+        color: maroon;
+      }
+
+    .OurCodeMirror-toolbar > li:hover > .delete {
+      display: block;
+    }
+
+
+/**
+ * Markdown
+ */
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  color: #090909;
+  line-height: 1.5;
+}
+
+.cm-header-1 {
+  font-size: 36px;
+}
+
+.cm-header-2 {
+  font-size: 30px;
+}
+
+.cm-header-3 {
+  font-size: 24px;
+}
+
+.cm-header-4 {
+  font-size: 18px;
+}
+
+.cm-header-5 {
+  font-size: 14px;
+}
+
+.cm-header-6 {
+  font-size: 12px;
+}
