@@ -35,7 +35,7 @@
     "~/App_Plugins/CodeMirror/Backoffice/PrevalueEditors/controllers/keymaps.controller.js",
     "~/App_Plugins/CodeMirror/Backoffice/PrevalueEditors/controllers/options.controller.js",
     "~/App_Plugins/CodeMirror/Backoffice/PrevalueEditors/controllers/json.controller.js",
-    "~/App_Plugins/CodeMirror/Backoffice/Dialogs/controllers/tool.controller.js"
+    "~/App_Plugins/CodeMirror/Backoffice/PrevalueEditors/controllers/theme.controller.js"
   ],
   "css": [
     "~/App_Plugins/CodeMirror/Assets/codemirror/lib/codemirror.css",

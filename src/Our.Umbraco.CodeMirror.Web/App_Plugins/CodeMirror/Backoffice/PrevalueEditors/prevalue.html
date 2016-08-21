@@ -58,25 +58,10 @@
         </div>
     </umb-control-group>
 
-
-
     <umb-control-group label="Theme" description="Create your theme here">
-        <input type="text" ng-model="model.value.theme.name" class="form-control" placeholder="Give your theme a name" />
-        <umb-codemirror ng-model="model.value.theme.css" options="{ mode:'css', lineNumbers: true }" class="form-control"></umb-codemirror>
-    </umb-control-group>
-
-    <umb-control-group label="Preview">
-        <div ng-controller="OurCodeMirror.PropertyEditors.CodeMirrorController" ng-init="model.config{ defaults: model.value }">
-            <div ng-if="ready">
-                <div class="OurCodeMirror">
-                    <ul ng-if="tools.length > 0" class="OurCodeMirror-toolbar">
-                        <li ng-repeat="tool in tools">
-                            <a href="#" prevent-default ng-class="tool.className" ng-click="executeAction($index)"></a>
-                        </li>
-                    </ul>
-                    <umb-codemirror ng-model="model.value" options="options"></umb-codemirror>
-                </div>
-            </div>
+        <div ng-controller="OurCodeMirror.PrevalueEditors.ThemeController">
+            <span>.cm-s-<input type="text" ng-model="model.value.theme.name" class="form-control" placeholder="default" /></span>
+            <umb-codemirror ng-model="model.value.theme.style" options="{ mode:'css', lineNumbers: true }" class="form-control"></umb-codemirror>
         </div>
     </umb-control-group>
 

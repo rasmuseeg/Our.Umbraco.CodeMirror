@@ -1,12 +1,12 @@
 
-.cm-s-default {
+.OurCodeMirror .CodeMirror {
   border: 1px solid #ccc;
   height: auto !important;
   min-height: 0;
 }
 
-.CodeMirror.cm-s-default,
-.CodeMirror .CodeMirror-scroll {
+.OurCodeMirror .CodeMirror,
+.OurCodeMirror .CodeMirror .CodeMirror-scroll {
   height: auto;
   min-height: 0;
 }
